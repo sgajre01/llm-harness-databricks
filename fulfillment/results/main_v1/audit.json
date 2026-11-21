@@ -1,0 +1,15 @@
+{
+  "questions": 50,
+  "observations": 100,
+  "unique_pairs": 100,
+  "model_endpoint": "databricks-qwen3-next-80b-a3b-instruct",
+  "application_call_attempts": 200,
+  "successful_calls": 200,
+  "tests_passed": 7,
+  "frozen_hashes_match": true,
+  "expected_labels_match_dataset": true,
+  "label_keys_absent_from_prompts": true,
+  "provider_response_models": [
+    "qwen3-next-instruct-091725"
+  ]
+}

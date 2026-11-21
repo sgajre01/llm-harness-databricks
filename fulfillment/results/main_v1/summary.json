@@ -1,0 +1,38 @@
+{
+  "observations": 100,
+  "questions": 50,
+  "arms": {
+    "baseline": {
+      "n": 50,
+      "correct": 45,
+      "accuracy": 0.9,
+      "median_seconds": 2.4191898107528687,
+      "successful_calls": 50,
+      "prompt_tokens": 1447038,
+      "completion_tokens": 7887,
+      "invalid_answers": 0
+    },
+    "harness": {
+      "n": 50,
+      "correct": 46,
+      "accuracy": 0.92,
+      "median_seconds": 3.231854557991028,
+      "successful_calls": 150,
+      "prompt_tokens": 89044,
+      "completion_tokens": 6752,
+      "invalid_answers": 0
+    }
+  },
+  "paired": {
+    "n": 50,
+    "wins": 3,
+    "losses": 2,
+    "ties": 45,
+    "improvement_pp": 2.0,
+    "bootstrap_95_ci_pp": [
+      -6.0,
+      10.0
+    ],
+    "exact_two_sided_p": 1
+  }
+}

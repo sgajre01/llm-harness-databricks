@@ -1,0 +1,6 @@
+{
+  "python": "3.11.10",
+  "databricks_sdk": "0.40.0",
+  "compute": "Databricks Free Edition serverless notebook",
+  "tests_passed": 7
+}

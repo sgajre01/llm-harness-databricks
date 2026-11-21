@@ -76,7 +76,7 @@ def generate(index, split="evaluation", seed=739021):
                 "status": "cancelled",
             }
         )
-    n = 32 if index % 2 == 0 else 64
+    n = 128 if index % 2 == 0 else 256
     for j in range(n):
         other_s, other_w, other_z = f"OTHER-SKU-{j}", f"OTHER-WH-{j}", f"OTHER-ZONE-{j}"
         t["orders"].append(

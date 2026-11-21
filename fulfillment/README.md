@@ -15,7 +15,7 @@ The harness makes three calls versus one. Routing and extra inference are part o
 
 ## Data and scoring
 
-There are 50 fresh evaluation worlds (IDs 1000–1049) and 5 pilot worlds from a separate seed (IDs 9000–9004). Every question contains one SKU, one target warehouse, two confirmed receipts and a shipping lane. Archived inventory snapshots and cancelled receipts must be ignored. Unrelated records and same-SKU stock at another warehouse are distractors. The two distraction levels (32 or 64 unrelated records per table) keep target-order complexity identical.
+There are 50 fresh evaluation worlds (IDs 1000–1049) and 5 pilot worlds from a separate seed (IDs 9000–9004). Every question contains one SKU, one target warehouse, two confirmed receipts and a shipping lane. Archived inventory snapshots and cancelled receipts must be ignored. Unrelated records and same-SKU stock at another warehouse are distractors. The two distraction levels (128 or 256 unrelated records per table) keep target-order complexity identical.
 
 The rule is explicit: latest dispatch = delivery deadline minus transit; negative dispatch means zero units. Otherwise available stock = max(0, on-hand minus reserved) plus receipts arriving by the cutoff, inclusive. Deliver the minimum of ordered and available units. Expected answers come from deterministic Python and are checked by a separately written reference plus hand-calculated edge cases.
 

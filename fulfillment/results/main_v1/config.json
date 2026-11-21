@@ -1,0 +1,19 @@
+{
+  "model": "databricks-qwen3-next-80b-a3b-instruct",
+  "temperature": 0,
+  "max_tokens_per_call": 1200,
+  "dataset_sha256": "b37d3a978883db067fb48b7ac8778e7030762ad0f27d30bf51c3994a7177bc3b",
+  "source_sha256": {
+    "scenario.py": "fd33f1e6e349ea0d56ad46190ad448f5bdcc5b38d0959dcddfb83960d804820e",
+    "llm_client.py": "ba964008dc7049abc454e3ee3787cf7279af8f52fa09f945d2224c7e2f292a81",
+    "baseline.py": "662fce61a5edac3ca75f0450c0d994e1392e23ca94ba3facd4d80ccc6b23e1ba",
+    "harness.py": "c2dd5f3c7876a9e9df2919cee302461acd104149c9ed795b0a055f40824e6f97",
+    "evaluate.py": "0aa338419997c08e18b5ac82dd3bb64da2b4177a87be7c40774c5f6fde850e3a"
+  },
+  "ordering_seed": 3017,
+  "scoring": "exact integer ship_units; calculation logged but unscored",
+  "arms": [
+    "baseline",
+    "harness"
+  ]
+}

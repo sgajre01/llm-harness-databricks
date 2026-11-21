@@ -1,0 +1,2396 @@
+[
+  {
+    "id": "pilot-100",
+    "split": "pilot",
+    "order_id": "O100",
+    "category": "lower_distraction",
+    "question": "For order O100, how many units can be delivered by day 6, and what is the invoice total for those units? Apply all supplied policies.",
+    "policy": "All amounts are USD; no tax. Dates are integer calendar-day offsets from today (0).\nFor this order use only records matching its customer, SKU, warehouse and destination region.\nUse active contracts and prices (valid_from <= 0 <= valid_to); expired or future records never apply.\nFor each SKU, use a matching active contract price if present, otherwise the active catalog price.\nThe active customer contract specifies discount_pct and excluded_skus. Discount applies to each\nnon-excluded SKU. Round the discounted unit price to cents BEFORE multiplying by shipped units.\nDelivery deadline is inclusive. Latest dispatch day = deliver_by_day - transit_days for the region.\nUsable stock = max(0, on_hand - reserved) plus incoming_qty ONLY if incoming_day <= latest dispatch day.\nIf latest dispatch day < 0, ship zero units. Ship min(ordered_qty, usable stock) for each SKU; partial\nfulfillment is allowed. Invoice only units deliverable by the deadline; backorders are not invoiced.\nMerchandise subtotal is the sum of shipped quantity times discounted unit price. If zero units ship,\nfreight and surcharge are both zero. Otherwise freight is zero if merchandise subtotal >= the region's\nfree_freight_threshold, else base_freight. A matching ACTIVE customer freight override replaces only\nbase_freight, not the threshold. Add the region's handling_per_unit times total shipped units.\nFor each shipped SKU marked hazardous in the product record add hazardous_per_unit * its shipped units.\nInvoice total = merchandise subtotal + freight + handling + hazardous surcharge. Round final total to cents.\nIgnore unrelated records. Never combine inventory across warehouses.",
+    "tables": {
+      "orders": [
+        {
+          "id": "OTHER-O3",
+          "customer": "OTHER-C3",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R3",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P3",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O5",
+          "customer": "OTHER-C5",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R5",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P5",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O4",
+          "customer": "OTHER-C4",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R4",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P4",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O0",
+          "customer": "OTHER-C0",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R0",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P0",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O7",
+          "customer": "OTHER-C7",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R7",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P7",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O6",
+          "customer": "OTHER-C6",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R6",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P6",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "O100",
+          "customer": "C100",
+          "warehouse": "W1",
+          "region": "R0",
+          "deliver_by_day": 6,
+          "lines": [
+            {
+              "sku": "P100-0",
+              "ordered_qty": 20
+            },
+            {
+              "sku": "P100-1",
+              "ordered_qty": 14
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O1",
+          "customer": "OTHER-C1",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R1",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P1",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O2",
+          "customer": "OTHER-C2",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R2",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P2",
+              "ordered_qty": 100
+            }
+          ]
+        }
+      ],
+      "contracts": [
+        {
+          "customer": "OTHER-C6",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "C100",
+          "valid_from": -100,
+          "valid_to": -1,
+          "discount_pct": 35,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C2",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C1",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C4",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "C100",
+          "valid_from": -20,
+          "valid_to": 30,
+          "discount_pct": 5,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C5",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C0",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C7",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C3",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        }
+      ],
+      "prices": [
+        {
+          "sku": "P100-1",
+          "customer": "*",
+          "unit_usd": "82.82",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P2",
+          "customer": "OTHER-C2",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P6",
+          "customer": "OTHER-C6",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P100-0",
+          "customer": "C100",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        },
+        {
+          "sku": "OTHER-P1",
+          "customer": "OTHER-C1",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P7",
+          "customer": "OTHER-C7",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P5",
+          "customer": "OTHER-C5",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P3",
+          "customer": "OTHER-C3",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P4",
+          "customer": "OTHER-C4",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P0",
+          "customer": "OTHER-C0",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P100-0",
+          "customer": "C100",
+          "unit_usd": "11.31",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "P100-0",
+          "customer": "*",
+          "unit_usd": "34.95",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "P100-1",
+          "customer": "C100",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "OTHER-P5",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P0",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P100-1",
+          "warehouse": "W1",
+          "on_hand": 21,
+          "reserved": 4,
+          "incoming_qty": 4,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P100-0",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P1",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P100-1",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P6",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P7",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P4",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P100-0",
+          "warehouse": "W1",
+          "on_hand": 14,
+          "reserved": 3,
+          "incoming_qty": 19,
+          "incoming_day": 7
+        },
+        {
+          "sku": "OTHER-P3",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P2",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        }
+      ],
+      "products": [
+        {
+          "sku": "OTHER-P0",
+          "hazardous": true
+        },
+        {
+          "sku": "P100-1",
+          "hazardous": false
+        },
+        {
+          "sku": "OTHER-P1",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P6",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P2",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P4",
+          "hazardous": true
+        },
+        {
+          "sku": "P100-0",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P3",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P7",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P5",
+          "hazardous": true
+        }
+      ],
+      "lanes": [
+        {
+          "region": "OTHER-R0",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R1",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R2",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R3",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R4",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R5",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R7",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R6",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "R0",
+          "transit_days": 2,
+          "free_freight_threshold": 500,
+          "base_freight": 40,
+          "handling_per_unit": "0.60",
+          "hazardous_per_unit": "2.75"
+        }
+      ],
+      "freight_overrides": [
+        {
+          "customer": "C100",
+          "region": "R0",
+          "active": false,
+          "base_freight": 15
+        },
+        {
+          "customer": "OTHER-C6",
+          "region": "OTHER-R6",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C1",
+          "region": "OTHER-R1",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C0",
+          "region": "OTHER-R0",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C2",
+          "region": "OTHER-R2",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C5",
+          "region": "OTHER-R5",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C7",
+          "region": "OTHER-R7",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C4",
+          "region": "OTHER-R4",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C3",
+          "region": "OTHER-R3",
+          "active": true,
+          "base_freight": 0
+        }
+      ]
+    },
+    "ground_truth": {
+      "ship_units": 25,
+      "invoice_usd": "1264.91"
+    }
+  },
+  {
+    "id": "pilot-101",
+    "split": "pilot",
+    "order_id": "O101",
+    "category": "higher_distraction",
+    "question": "For order O101, how many units can be delivered by day 2, and what is the invoice total for those units? Apply all supplied policies.",
+    "policy": "All amounts are USD; no tax. Dates are integer calendar-day offsets from today (0).\nFor this order use only records matching its customer, SKU, warehouse and destination region.\nUse active contracts and prices (valid_from <= 0 <= valid_to); expired or future records never apply.\nFor each SKU, use a matching active contract price if present, otherwise the active catalog price.\nThe active customer contract specifies discount_pct and excluded_skus. Discount applies to each\nnon-excluded SKU. Round the discounted unit price to cents BEFORE multiplying by shipped units.\nDelivery deadline is inclusive. Latest dispatch day = deliver_by_day - transit_days for the region.\nUsable stock = max(0, on_hand - reserved) plus incoming_qty ONLY if incoming_day <= latest dispatch day.\nIf latest dispatch day < 0, ship zero units. Ship min(ordered_qty, usable stock) for each SKU; partial\nfulfillment is allowed. Invoice only units deliverable by the deadline; backorders are not invoiced.\nMerchandise subtotal is the sum of shipped quantity times discounted unit price. If zero units ship,\nfreight and surcharge are both zero. Otherwise freight is zero if merchandise subtotal >= the region's\nfree_freight_threshold, else base_freight. A matching ACTIVE customer freight override replaces only\nbase_freight, not the threshold. Add the region's handling_per_unit times total shipped units.\nFor each shipped SKU marked hazardous in the product record add hazardous_per_unit * its shipped units.\nInvoice total = merchandise subtotal + freight + handling + hazardous surcharge. Round final total to cents.\nIgnore unrelated records. Never combine inventory across warehouses.",
+    "tables": {
+      "orders": [
+        {
+          "id": "OTHER-O0",
+          "customer": "OTHER-C0",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R0",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P0",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O5",
+          "customer": "OTHER-C5",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R5",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P5",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O19",
+          "customer": "OTHER-C19",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R19",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P19",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O13",
+          "customer": "OTHER-C13",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R13",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P13",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O8",
+          "customer": "OTHER-C8",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R8",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P8",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O1",
+          "customer": "OTHER-C1",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R1",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P1",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O16",
+          "customer": "OTHER-C16",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R16",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P16",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O2",
+          "customer": "OTHER-C2",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R2",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P2",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O18",
+          "customer": "OTHER-C18",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R18",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P18",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O15",
+          "customer": "OTHER-C15",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R15",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P15",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O12",
+          "customer": "OTHER-C12",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R12",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P12",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O3",
+          "customer": "OTHER-C3",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R3",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P3",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O9",
+          "customer": "OTHER-C9",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R9",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P9",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O10",
+          "customer": "OTHER-C10",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R10",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P10",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O17",
+          "customer": "OTHER-C17",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R17",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P17",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O14",
+          "customer": "OTHER-C14",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R14",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P14",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O7",
+          "customer": "OTHER-C7",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R7",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P7",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O6",
+          "customer": "OTHER-C6",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R6",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P6",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "O101",
+          "customer": "C101",
+          "warehouse": "W2",
+          "region": "R1",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "P101-0",
+              "ordered_qty": 15
+            },
+            {
+              "sku": "P101-1",
+              "ordered_qty": 30
+            },
+            {
+              "sku": "P101-2",
+              "ordered_qty": 15
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O4",
+          "customer": "OTHER-C4",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R4",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P4",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O11",
+          "customer": "OTHER-C11",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R11",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P11",
+              "ordered_qty": 100
+            }
+          ]
+        }
+      ],
+      "contracts": [
+        {
+          "customer": "C101",
+          "valid_from": -100,
+          "valid_to": -1,
+          "discount_pct": 35,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C14",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C5",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C4",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C11",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C15",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C1",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C3",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C9",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "C101",
+          "valid_from": -20,
+          "valid_to": 30,
+          "discount_pct": 12,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C8",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C10",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C2",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C6",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C7",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C19",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C12",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C17",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C16",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C13",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C0",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C18",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        }
+      ],
+      "prices": [
+        {
+          "sku": "OTHER-P16",
+          "customer": "OTHER-C16",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P12",
+          "customer": "OTHER-C12",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P19",
+          "customer": "OTHER-C19",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P13",
+          "customer": "OTHER-C13",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P101-2",
+          "customer": "C101",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        },
+        {
+          "sku": "P101-1",
+          "customer": "C101",
+          "unit_usd": "20.77",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P10",
+          "customer": "OTHER-C10",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P15",
+          "customer": "OTHER-C15",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P8",
+          "customer": "OTHER-C8",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P1",
+          "customer": "OTHER-C1",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P101-1",
+          "customer": "*",
+          "unit_usd": "32.23",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P2",
+          "customer": "OTHER-C2",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P18",
+          "customer": "OTHER-C18",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P101-0",
+          "customer": "*",
+          "unit_usd": "19.59",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P11",
+          "customer": "OTHER-C11",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P101-0",
+          "customer": "C101",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        },
+        {
+          "sku": "OTHER-P0",
+          "customer": "OTHER-C0",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P4",
+          "customer": "OTHER-C4",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P101-2",
+          "customer": "*",
+          "unit_usd": "67.07",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P5",
+          "customer": "OTHER-C5",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P7",
+          "customer": "OTHER-C7",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P9",
+          "customer": "OTHER-C9",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P14",
+          "customer": "OTHER-C14",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P17",
+          "customer": "OTHER-C17",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P101-1",
+          "customer": "C101",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        },
+        {
+          "sku": "OTHER-P3",
+          "customer": "OTHER-C3",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P6",
+          "customer": "OTHER-C6",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "OTHER-P13",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P101-0",
+          "warehouse": "W2",
+          "on_hand": 17,
+          "reserved": 6,
+          "incoming_qty": 8,
+          "incoming_day": 3
+        },
+        {
+          "sku": "OTHER-P18",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P0",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P7",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P8",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P12",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P101-1",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P14",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P101-0",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P2",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P101-2",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P10",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P4",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P101-2",
+          "warehouse": "W2",
+          "on_hand": 29,
+          "reserved": 6,
+          "incoming_qty": 12,
+          "incoming_day": 1
+        },
+        {
+          "sku": "OTHER-P16",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P101-1",
+          "warehouse": "W2",
+          "on_hand": 19,
+          "reserved": 2,
+          "incoming_qty": 14,
+          "incoming_day": 3
+        },
+        {
+          "sku": "OTHER-P15",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P5",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P6",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P11",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P9",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P1",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P17",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P19",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P3",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        }
+      ],
+      "products": [
+        {
+          "sku": "OTHER-P16",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P2",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P18",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P11",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P13",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P0",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P5",
+          "hazardous": true
+        },
+        {
+          "sku": "P101-2",
+          "hazardous": false
+        },
+        {
+          "sku": "OTHER-P19",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P12",
+          "hazardous": true
+        },
+        {
+          "sku": "P101-1",
+          "hazardous": false
+        },
+        {
+          "sku": "OTHER-P15",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P7",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P14",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P3",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P9",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P1",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P6",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P10",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P17",
+          "hazardous": true
+        },
+        {
+          "sku": "P101-0",
+          "hazardous": false
+        },
+        {
+          "sku": "OTHER-P8",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P4",
+          "hazardous": true
+        }
+      ],
+      "lanes": [
+        {
+          "region": "OTHER-R12",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R11",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R2",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R7",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R0",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R13",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R15",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R3",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R14",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R19",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R5",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R9",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R6",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R16",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R10",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R18",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R1",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R4",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R8",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "R1",
+          "transit_days": 2,
+          "free_freight_threshold": 1500,
+          "base_freight": 25,
+          "handling_per_unit": "0.35",
+          "hazardous_per_unit": "2.75"
+        },
+        {
+          "region": "OTHER-R17",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        }
+      ],
+      "freight_overrides": [
+        {
+          "customer": "OTHER-C12",
+          "region": "OTHER-R12",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C5",
+          "region": "OTHER-R5",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C18",
+          "region": "OTHER-R18",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C2",
+          "region": "OTHER-R2",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C3",
+          "region": "OTHER-R3",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C13",
+          "region": "OTHER-R13",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C8",
+          "region": "OTHER-R8",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C16",
+          "region": "OTHER-R16",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C9",
+          "region": "OTHER-R9",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C19",
+          "region": "OTHER-R19",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C6",
+          "region": "OTHER-R6",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C15",
+          "region": "OTHER-R15",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C17",
+          "region": "OTHER-R17",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C11",
+          "region": "OTHER-R11",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C1",
+          "region": "OTHER-R1",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C14",
+          "region": "OTHER-R14",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C7",
+          "region": "OTHER-R7",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C4",
+          "region": "OTHER-R4",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C10",
+          "region": "OTHER-R10",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C0",
+          "region": "OTHER-R0",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "C101",
+          "region": "R1",
+          "active": true,
+          "base_freight": 20
+        }
+      ]
+    },
+    "ground_truth": {
+      "ship_units": 43,
+      "invoice_usd": "1420.75"
+    }
+  },
+  {
+    "id": "pilot-102",
+    "split": "pilot",
+    "order_id": "O102",
+    "category": "lower_distraction",
+    "question": "For order O102, how many units can be delivered by day 4, and what is the invoice total for those units? Apply all supplied policies.",
+    "policy": "All amounts are USD; no tax. Dates are integer calendar-day offsets from today (0).\nFor this order use only records matching its customer, SKU, warehouse and destination region.\nUse active contracts and prices (valid_from <= 0 <= valid_to); expired or future records never apply.\nFor each SKU, use a matching active contract price if present, otherwise the active catalog price.\nThe active customer contract specifies discount_pct and excluded_skus. Discount applies to each\nnon-excluded SKU. Round the discounted unit price to cents BEFORE multiplying by shipped units.\nDelivery deadline is inclusive. Latest dispatch day = deliver_by_day - transit_days for the region.\nUsable stock = max(0, on_hand - reserved) plus incoming_qty ONLY if incoming_day <= latest dispatch day.\nIf latest dispatch day < 0, ship zero units. Ship min(ordered_qty, usable stock) for each SKU; partial\nfulfillment is allowed. Invoice only units deliverable by the deadline; backorders are not invoiced.\nMerchandise subtotal is the sum of shipped quantity times discounted unit price. If zero units ship,\nfreight and surcharge are both zero. Otherwise freight is zero if merchandise subtotal >= the region's\nfree_freight_threshold, else base_freight. A matching ACTIVE customer freight override replaces only\nbase_freight, not the threshold. Add the region's handling_per_unit times total shipped units.\nFor each shipped SKU marked hazardous in the product record add hazardous_per_unit * its shipped units.\nInvoice total = merchandise subtotal + freight + handling + hazardous surcharge. Round final total to cents.\nIgnore unrelated records. Never combine inventory across warehouses.",
+    "tables": {
+      "orders": [
+        {
+          "id": "OTHER-O4",
+          "customer": "OTHER-C4",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R4",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P4",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O1",
+          "customer": "OTHER-C1",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R1",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P1",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O3",
+          "customer": "OTHER-C3",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R3",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P3",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O5",
+          "customer": "OTHER-C5",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R5",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P5",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O7",
+          "customer": "OTHER-C7",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R7",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P7",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O2",
+          "customer": "OTHER-C2",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R2",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P2",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O6",
+          "customer": "OTHER-C6",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R6",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P6",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "OTHER-O0",
+          "customer": "OTHER-C0",
+          "warehouse": "W-OTHER",
+          "region": "OTHER-R0",
+          "deliver_by_day": 2,
+          "lines": [
+            {
+              "sku": "OTHER-P0",
+              "ordered_qty": 100
+            }
+          ]
+        },
+        {
+          "id": "O102",
+          "customer": "C102",
+          "warehouse": "W0",
+          "region": "R2",
+          "deliver_by_day": 4,
+          "lines": [
+            {
+              "sku": "P102-0",
+              "ordered_qty": 33
+            },
+            {
+              "sku": "P102-1",
+              "ordered_qty": 28
+            }
+          ]
+        }
+      ],
+      "contracts": [
+        {
+          "customer": "OTHER-C4",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C2",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C0",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C1",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C3",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C7",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "C102",
+          "valid_from": -20,
+          "valid_to": 30,
+          "discount_pct": 8,
+          "excluded_skus": [
+            "P102-1"
+          ]
+        },
+        {
+          "customer": "OTHER-C5",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "OTHER-C6",
+          "valid_from": -10,
+          "valid_to": 50,
+          "discount_pct": 40,
+          "excluded_skus": []
+        },
+        {
+          "customer": "C102",
+          "valid_from": -100,
+          "valid_to": -1,
+          "discount_pct": 35,
+          "excluded_skus": [
+            "P102-1"
+          ]
+        }
+      ],
+      "prices": [
+        {
+          "sku": "OTHER-P7",
+          "customer": "OTHER-C7",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P102-0",
+          "customer": "C102",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        },
+        {
+          "sku": "OTHER-P4",
+          "customer": "OTHER-C4",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P6",
+          "customer": "OTHER-C6",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P102-1",
+          "customer": "*",
+          "unit_usd": "51.05",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P0",
+          "customer": "OTHER-C0",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P102-0",
+          "customer": "*",
+          "unit_usd": "43.65",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P3",
+          "customer": "OTHER-C3",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P102-1",
+          "customer": "C102",
+          "unit_usd": "3.99",
+          "valid_from": -100,
+          "valid_to": -1
+        },
+        {
+          "sku": "OTHER-P2",
+          "customer": "OTHER-C2",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "OTHER-P5",
+          "customer": "OTHER-C5",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        },
+        {
+          "sku": "P102-0",
+          "customer": "C102",
+          "unit_usd": "68.13",
+          "valid_from": -5,
+          "valid_to": 30
+        },
+        {
+          "sku": "OTHER-P1",
+          "customer": "OTHER-C1",
+          "unit_usd": "1.00",
+          "valid_from": -10,
+          "valid_to": 50
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "P102-1",
+          "warehouse": "W0",
+          "on_hand": 6,
+          "reserved": 4,
+          "incoming_qty": 7,
+          "incoming_day": 7
+        },
+        {
+          "sku": "OTHER-P2",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P102-0",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P0",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P102-1",
+          "warehouse": "W-OTHER",
+          "on_hand": 999,
+          "reserved": 0,
+          "incoming_qty": 0,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P4",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P3",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "P102-0",
+          "warehouse": "W0",
+          "on_hand": 6,
+          "reserved": 2,
+          "incoming_qty": 11,
+          "incoming_day": 3
+        },
+        {
+          "sku": "OTHER-P7",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P5",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P1",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        },
+        {
+          "sku": "OTHER-P6",
+          "warehouse": "W-OTHER",
+          "on_hand": 100,
+          "reserved": 0,
+          "incoming_qty": 50,
+          "incoming_day": 0
+        }
+      ],
+      "products": [
+        {
+          "sku": "OTHER-P6",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P5",
+          "hazardous": true
+        },
+        {
+          "sku": "P102-1",
+          "hazardous": false
+        },
+        {
+          "sku": "OTHER-P1",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P3",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P7",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P2",
+          "hazardous": true
+        },
+        {
+          "sku": "OTHER-P0",
+          "hazardous": true
+        },
+        {
+          "sku": "P102-0",
+          "hazardous": false
+        },
+        {
+          "sku": "OTHER-P4",
+          "hazardous": true
+        }
+      ],
+      "lanes": [
+        {
+          "region": "OTHER-R3",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R2",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "R2",
+          "transit_days": 3,
+          "free_freight_threshold": 1000,
+          "base_freight": 40,
+          "handling_per_unit": "0.60",
+          "hazardous_per_unit": "2.75"
+        },
+        {
+          "region": "OTHER-R6",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R0",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R1",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R5",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R4",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        },
+        {
+          "region": "OTHER-R7",
+          "transit_days": 1,
+          "free_freight_threshold": 100,
+          "base_freight": 0,
+          "handling_per_unit": "0.00",
+          "hazardous_per_unit": "0.00"
+        }
+      ],
+      "freight_overrides": [
+        {
+          "customer": "OTHER-C1",
+          "region": "OTHER-R1",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "C102",
+          "region": "R2",
+          "active": true,
+          "base_freight": 20
+        },
+        {
+          "customer": "OTHER-C7",
+          "region": "OTHER-R7",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C4",
+          "region": "OTHER-R4",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C2",
+          "region": "OTHER-R2",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C6",
+          "region": "OTHER-R6",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C5",
+          "region": "OTHER-R5",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C0",
+          "region": "OTHER-R0",
+          "active": true,
+          "base_freight": 0
+        },
+        {
+          "customer": "OTHER-C3",
+          "region": "OTHER-R3",
+          "active": true,
+          "base_freight": 0
+        }
+      ]
+    },
+    "ground_truth": {
+      "ship_units": 6,
+      "invoice_usd": "376.42"
+    }
+  }
+]

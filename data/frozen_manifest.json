@@ -1,0 +1,15 @@
+{
+  "frozen_at_utc": "2026-11-21T14:44:21.290978+00:00",
+  "phase": "before_first_scored_call",
+  "files": {
+    "llm_client.py": "943b53809f6eb9caaee4dfcb3f0b24efb2d7de28f00a4e9819bed1ab52567c92",
+    "baseline.py": "06cc6027f630d0c8bf8d4c510ff2b3d6d13fb164c101476715993b31f010ece0",
+    "harness.py": "5fd7470597310b58096d60c8f5b8767e92fb3f415e4a77aff35699a0542d19bb",
+    "scenario.py": "d48a327bfe2f3e872cdada8d8bedb59765be717dd699f3cffbe2c0118650754e",
+    "evaluate.py": "035bf14b61ccc63e06ee6673517c697a78a164e515616416acda395e95e8c0a1",
+    "report.py": "7d95c77daa45e92098cff64493ad32c41b4babd9c75c125141a02ab149e68a27",
+    "notebooks/run_experiment.py": "620b122282aa68ba1608a80a6330f37fc1455e7bbfa1aed8a1ddc3552c4e8ecb",
+    "data/examples.json": "154484500cfa833c835b17a179d78f1dfdddc1f5e15c62cee241cf8f85725839",
+    "data/pilot.json": "fe33b338b94d58678fb863b62f5af406d4fff0189d2f3dfb98b1785d6b197447"
+  }
+}

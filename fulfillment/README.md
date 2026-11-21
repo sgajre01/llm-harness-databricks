@@ -4,6 +4,10 @@ This experiment asks one question: **does a focused, multi-call harness calculat
 
 The code is developed on `experiment/fulfillment-two-arm`. The original three-arm experiment remains on `main`. This is a fresh dataset and a separate experiment; old quantity-only results are not reused.
 
+## Measured result
+
+On 50 evaluation questions, baseline scored **45/50 (90%)** and the harness **46/50 (92%)**. The +2 percentage-point accuracy difference was uncertain (95% paired-bootstrap interval -6 to +10 points); the accuracy hypothesis was not established. The harness used 93.4% fewer total tokens. Read the [technical results](RESULTS.md) and [per-question report](results/main_v1/report.md). All seven tests and the frozen-hash audit passed on Databricks.
+
 ## The two approaches
 
 - **Baseline:** one call gets all orders, stock records, receipts and shipping lanes, plus the policy and target question.

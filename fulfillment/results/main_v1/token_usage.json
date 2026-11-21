@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "questions": 50,
+    "input_tokens": 1447038,
+    "output_tokens": 7887,
+    "total_tokens": 1454925,
+    "mean_tokens_per_question": 29098.5,
+    "model_calls": 50
+  },
+  "harness": {
+    "questions": 50,
+    "input_tokens": 89044,
+    "output_tokens": 6752,
+    "total_tokens": 95796,
+    "mean_tokens_per_question": 1915.92,
+    "model_calls": 150
+  },
+  "comparison": {
+    "total_token_reduction_pct": 93.41574307954018,
+    "input_token_reduction_pct": 93.8464642946488,
+    "output_token_reduction_pct": 14.390769620895139,
+    "baseline_to_harness_total_token_ratio": 15.187742703244394,
+    "measured_dollar_cost": null,
+    "dollar_cost_note": "Free Edition execution; no billed dollar savings measured. Input/output rates, caching, and compute costs must be considered separately."
+  }
+}
